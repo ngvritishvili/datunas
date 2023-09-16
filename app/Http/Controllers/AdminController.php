@@ -16,10 +16,8 @@ class AdminController extends Controller
      *
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function index($locale)
+    public function index()
     {
-        App::setLocale($locale);
-
         return view('admin.dashboard');
     }
 

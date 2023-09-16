@@ -27,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::group(['middleware' => ['guest']], function () {
     Route::get('products', [ProductController::class, 'index']);
 });
@@ -55,16 +51,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::get('/', function () {
-    $locale = app()->getLocale();
-    return redirect('admin/en')->with($locale);
+    return redirect('admin');
 });
 Route::get('/home', function (){
-    $locale = app()->getLocale();
-    return redirect('admin/en')->with($locale);
+    return redirect('admin');
 });
 Route::get('/admin', function () {
-    $locale = app()->getLocale();
-    return redirect('admin/en')->with($locale);
+    return redirect('admin');
 });
 
 
@@ -79,8 +72,7 @@ Route::get('/contact/{locale}', [HomeController::class. 'contact'])->name('conta
 
 Route::get('createTranslate', [HomeController::class. 'createTranslate'])->name('createTranslate');
 
-Route::middleware('auth')->prefix('admin/{locale}')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
-
 });
 
