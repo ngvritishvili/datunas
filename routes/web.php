@@ -32,7 +32,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 // Protected routes, only for authorized users
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum','admin']], function () {
     Route::resources([
         'products' => ProductController::class,
         'contact' => ContactController::class,
@@ -72,7 +72,7 @@ Route::get('/contact/{locale}', [HomeController::class. 'contact'])->name('conta
 
 Route::get('createTranslate', [HomeController::class. 'createTranslate'])->name('createTranslate');
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 });
 
